@@ -265,9 +265,7 @@
 			 }
 			});
 
-            var receiverElem = document.getElementById('receiver').contentWindow;
-            console.log("Send data: " + JSON.stringify(data));
-            receiverElem.postMessage(data, "https://adviacu.dev.amelia.com/Amelia/ui/advia_internal/chat?domainCode=adviacu_internalfacing_dev");
+       
         }
         window.addEventListener('message', receiveMessage);
 
