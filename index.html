@@ -182,11 +182,11 @@
 
         function closeConversation() {
             console.log("close conversation");
-            sendMessage({actionType: 'endConversation'});
+            sendMessageNew({actionType: 'endConversation'});
         }
 
         function resetConversation() {
-            sendMessage({actionType: 'resetConversation'});
+            sendMessageNew({actionType: 'resetConversation'});
         }
 
         function callBpnWithEchoMessage(bpnName, message) {
