@@ -156,6 +156,7 @@
         <tr><td><button onclick="closeConversation()">Close Conversation</button></td></tr>
         <tr><td><button onclick="resetConversation()">Reset Conversation</button></td></tr>
         <tr><td><button onclick="sendConversationAttribute('test1', 'value1')">Send Attributes</button></td></tr>
+		<tr><td><button onclick="sendConversationAttributeNew('onPage', 'general')">Send Attributes - New</button></td></tr>
         <tr><td><button onclick="callBpn('test_invoke_flow')">Call BPN - test_invoke_flow</button></td></tr>
     </table>
     <div class="chat-overlay">
@@ -163,7 +164,7 @@
             <div class="chat-overlay-header-mobile">
                 <img class="close" src="./amelia-close.png" alt="toggle chat overlay" />
             </div>
-            <iframe id="receiver" src="https://guardian.dev.amelia.com/Amelia/ui/guardiantest/?domainCode=voiceservice"
+            <iframe id="receiver" src="https://adviacu.dev.amelia.com/Amelia/ui/advia_internal/chat?domainCode=adviacu_internalfacing_dev"
                 frameborder="0" width="100%" height="100%" allow="geolocation; microphone; camera" onload="">
                 <p>Your browser does not support iframes.</p>
             </iframe>
@@ -176,6 +177,8 @@
 
 
     <script>
+	
+		
 
         function closeConversation() {
             console.log("close conversation");
@@ -207,6 +210,16 @@
             console.log("Send data: " + JSON.stringify(data));
             sendMessage(data);
         }
+		
+		function sendConversationAttributeNew(key, value) {
+            let data = {};
+            data['actionType'] = 'ameliaConversationAttributes';
+            let entry = {}
+            entry[key] = value;
+            data['actionData'] = entry;
+            console.log("Send data: " + JSON.stringify(data));
+            sendMessage(data);
+        }
 
         function logout() {
             sendMessage({actionType: 'logout'});
@@ -222,7 +235,7 @@
 
             var url = e.data.url;
             console.log("Event received: " + JSON.stringify(e.data));
-            if (e.origin !== 'https://guardian.dev.amelia.com')
+            if (e.origin !== 'https://adviacu-int.amelia.com')
                 return;
 
             if (e.data.action === "checkout" && e.data.additionalData) {
@@ -239,7 +252,22 @@
 
             var receiverElem = document.getElementById('receiver').contentWindow;
             console.log("Send data: " + JSON.stringify(data));
-            receiverElem.postMessage(data, "https://guardian.dev.amelia.com/Amelia/ui/guardiantest/?domainCode=voiceservice");
+            receiverElem.postMessage(data, "https://adviacu.dev.amelia.com");
+        }
+		
+		
+		function sendMessageNew(jsonData) {
+            
+			
+			window.addEventListener("message", (res) => {
+			 if (res?.data?.notificationType === "conversationNew" || res?.data?.notificationType === "conversationJoined") {
+			   iframe?.contentWindow?.postMessage(jsonData,    "https://adviacu.dev.amelia.com");
+			 }
+			});
+
+            var receiverElem = document.getElementById('receiver').contentWindow;
+            console.log("Send data: " + JSON.stringify(data));
+            receiverElem.postMessage(data, "https://adviacu.dev.amelia.com/Amelia/ui/advia_internal/chat?domainCode=adviacu_internalfacing_dev");
         }
         window.addEventListener('message', receiveMessage);
 
