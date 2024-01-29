@@ -228,11 +228,11 @@
     <script>
       function closeConversation() {
         console.log("close conversation");
-        sendMessageNew({ actionType: "endConversation" });
+        sendMessageNew({ actionType: "endConversation" , actionData: true}});
       }
 
       function resetConversation() {
-        sendMessageNew({ actionType: "resetConversation" });
+        sendMessageNew({ actionType: "resetConversation", actionData: true});
       }
 
       function callBpnWithEchoMessage(bpnName, message) {
@@ -289,7 +289,7 @@
 
         var url = e.data.url;
         console.log("Event received: " + JSON.stringify(e.data));
-        if (e.origin !== "https://adviacu-int.amelia.com") return;
+        if (e.origin !== "https://adviacu.dev.amelia.com") return;
 
         if (e.data.action === "checkout" && e.data.additionalData) {
           window.open("https://www.google.com");
