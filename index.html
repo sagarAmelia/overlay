@@ -266,7 +266,8 @@
 				 if (res?.data?.notificationType === "conversationNew" || res?.data?.notificationType === "conversationJoined") {
 					
 				const iframe = document.getElementById("am-chat-overlay-iframe");
-				   iframe?.contentWindow?.postMessage(jsonData,    "https://adviacu.dev.amelia.com");
+				 console.log("Inside if block ");	
+				iframe?.contentWindow?.postMessage(jsonData,    "https://adviacu.dev.amelia.com");
 				 }
 				});
 			 
