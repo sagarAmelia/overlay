@@ -257,7 +257,8 @@
 		
 		
 		function sendMessageNew(jsonData) {
-            
+				console.log("response---: " + JSON.stringify(res));
+				
 			   iframe?.contentWindow?.postMessage(jsonData,    "https://adviacu.dev.amelia.com");
 			 
 			};
