@@ -258,12 +258,14 @@
 		
 		function sendMessageNew(jsonData) {
 				
-				const iframe = document.getElementById("am-chat-overlay-iframe") as HTMLIFrameElement;
+				//const iframe = document.getElementById("am-chat-overlay-iframe") as HTMLIFrameElement;
 				
-				console.log("iframe---: " + iframe);
+				//console.log("iframe---: " + iframe);
 				
 			  window.addEventListener("message", (res) => {
 				 if (res?.data?.notificationType === "conversationNew" || res?.data?.notificationType === "conversationJoined") {
+					
+				const iframe = document.getElementById("am-chat-overlay-iframe");
 				   iframe?.contentWindow?.postMessage(jsonData,    "https://adviacu.dev.amelia.com");
 				 }
 				});
