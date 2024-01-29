@@ -302,7 +302,7 @@
          * @param {Object} data - data to be sent to url provided of child frame
          * @returns - no return
          */
-
+		console.log(" data inside send message: " + data);
         var receiverElem = document.getElementById("receiver").contentWindow;
         console.log("Send data: " + JSON.stringify(data));
         receiverElem.postMessage(data, "https://adviacu.dev.amelia.com");
