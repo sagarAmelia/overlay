@@ -255,23 +255,26 @@
             receiverElem.postMessage(data, "https://adviacu.dev.amelia.com");
         }
 		
+		var isAppStarted = false;
+		window.addEventListener("message", (res) => {
+			
+		console.log("Inside listner "+res);
+		 if (res?.data?.notificationType === "conversationNew" || res?.data?.notificationType === "conversationJoined") {
+			console.log("Inside if ");
+			isAppStarted = true;
+		});
 		
 		function sendMessageNew(jsonData) {
 				
 				//const iframe = document.getElementById("am-chat-overlay-iframe") as HTMLIFrameElement;
 				
 				console.log("Inside send message new ");
-				
-			  window.addEventListener("message", (res) => {
-					
-					console.log("Inside listner "+res);
-				 if (res?.data?.notificationType === "conversationNew" || res?.data?.notificationType === "conversationJoined") {
-					
-				const iframe = document.getElementById("am-chat-overlay-iframe");
-				 console.log("Inside if block ");	
-				iframe?.contentWindow?.postMessage(jsonData,    "https://adviacu.dev.amelia.com");
-				 }
-				});
+				if(isAppStarted){
+					const iframe = document.getElementById("receiver");
+					console.log("Inside if send message ");	
+		 
+					iframe?.contentWindow?.postMessage(jsonData,    "https://adviacu.dev.amelia.com");
+				}
 			 
 			};
 
