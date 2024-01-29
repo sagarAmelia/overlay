@@ -232,7 +232,7 @@
       }
 
       function resetConversation() {
-        sendMessageNew({ actionType: "resetConversation" });
+        sendMessageNew({ actionType: "resetConversation" ,"actionData": true});
       }
 
       function callBpnWithEchoMessage(bpnName, message) {
