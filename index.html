@@ -258,16 +258,12 @@
 		
 		function sendMessageNew(jsonData) {
             
-			
-			window.addEventListener("message", (res) => {
-			 if (res?.data?.notificationType === "conversationNew" || res?.data?.notificationType === "conversationJoined") {
 			   iframe?.contentWindow?.postMessage(jsonData,    "https://adviacu.dev.amelia.com");
-			 }
-			});
+			 
+			};
 
        
-        }
-        window.addEventListener('message', receiveMessage);
+ 
 
         function openChatOverlay(receiverElem, imgElemOpen, imgElemClose) {
             document.getElementById('receiver').classList.add("open");
