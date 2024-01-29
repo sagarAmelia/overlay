@@ -257,11 +257,16 @@
 		
 		
 		function sendMessageNew(jsonData) {
-		
-				var res = document.getElementById('receiver').HTMLIFrameElement;
-				console.log("response---: " + res);
 				
-			   iframe?.contentWindow?.postMessage(jsonData,    "https://adviacu.dev.amelia.com");
+				const iframe = document.getElementById("am-chat-overlay-iframe") as HTMLIFrameElement;
+				
+				console.log("iframe---: " + iframe);
+				
+			  window.addEventListener("message", (res) => {
+				 if (res?.data?.notificationType === "conversationNew" || res?.data?.notificationType === "conversationJoined") {
+				   iframe?.contentWindow?.postMessage({ actionType:"ameliaConversationAttributes", actionData: { onPage:"general" } },    "https://adviacu.dev.amelia.com");
+				 }
+				});
 			 
 			};
 
