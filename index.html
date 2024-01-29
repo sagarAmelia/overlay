@@ -228,7 +228,7 @@
     <script>
       function closeConversation() {
         console.log("close conversation");
-        sendMessageNew({ actionType: "endConversation" });
+        sendMessageNew({ actionType: "endConversation" ,"actionData": true});
       }
 
       function resetConversation() {
