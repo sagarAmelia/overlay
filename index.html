@@ -289,7 +289,7 @@
 
         var url = e.data.url;
         console.log("Event received: " + JSON.stringify(e.data));
-        if (e.origin !== "https://fcib.dev.amelia.com") return;
+        if (e.origin !== "https://localhost") return;
 
         if (e.data.action === "checkout" && e.data.additionalData) {
           window.open("https://www.google.com");
@@ -305,7 +305,7 @@
 
         var receiverElem = document.getElementById("receiver").contentWindow;
         console.log("Send data: " + JSON.stringify(data));
-        receiverElem.postMessage(data, "https://fcib.dev.amelia.com");
+        receiverElem.postMessage(data, "https://localhost");
       }
 
       var isAppStarted = false;
@@ -329,7 +329,7 @@
           console.log("Inside if send message ");
           iframe?.contentWindow?.postMessage(
             jsonData,
-            "https://fcib.dev.amelia.com"
+            "https://localhost/"
           );
         }
       }
